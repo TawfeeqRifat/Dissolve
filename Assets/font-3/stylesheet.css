@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Graph Paper 04';
+    src: url('GraphPaper04Regular.eot');
+    src: local('Graph Paper 04'), local('GraphPaper04Regular'),
+        url('GraphPaper04Regular.eot?#iefix') format('embedded-opentype'),
+        url('GraphPaper04Regular.woff2') format('woff2'),
+        url('GraphPaper04Regular.woff') format('woff'),
+        url('GraphPaper04Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Graph Paper 03';
+    src: url('GraphPaper03Regular.eot');
+    src: local('Graph Paper 03'), local('GraphPaper03Regular'),
+        url('GraphPaper03Regular.eot?#iefix') format('embedded-opentype'),
+        url('GraphPaper03Regular.woff2') format('woff2'),
+        url('GraphPaper03Regular.woff') format('woff'),
+        url('GraphPaper03Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Graph Paper 02';
+    src: url('GraphPaper02Regular.eot');
+    src: local('Graph Paper 02'), local('GraphPaper02Regular'),
+        url('GraphPaper02Regular.eot?#iefix') format('embedded-opentype'),
+        url('GraphPaper02Regular.woff2') format('woff2'),
+        url('GraphPaper02Regular.woff') format('woff'),
+        url('GraphPaper02Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Graph Paper 01';
+    src: url('GraphPaper01Regular.eot');
+    src: local('Graph Paper 01'), local('GraphPaper01Regular'),
+        url('GraphPaper01Regular.eot?#iefix') format('embedded-opentype'),
+        url('GraphPaper01Regular.woff2') format('woff2'),
+        url('GraphPaper01Regular.woff') format('woff'),
+        url('GraphPaper01Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

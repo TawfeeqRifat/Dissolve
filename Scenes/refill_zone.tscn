@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cauov1k6277t4"]
+
+[ext_resource type="Script" path="res://scripts/refill_zone.gd" id="1_xyv47"]
+[ext_resource type="PackedScene" uid="uid://fym0gb6r6hv" path="res://Scenes/refill_body.tscn" id="2_xwmtd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skmuu"]
+size = Vector2(2900, 353.75)
+
+[node name="RefillZone" type="Node2D"]
+modulate = Color(0.237539, 0.237539, 0.237539, 1)
+script = ExtResource("1_xyv47")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.1, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_skmuu")
+debug_color = Color(0.403685, 0.487288, 0.944371, 0.42)
+
+[node name="refill_body" parent="." instance=ExtResource("2_xwmtd")]
+position = Vector2(-143, -7)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjldns5ndkhhm"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_87m3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urogt"]
+size = Vector2(19.1858, 25.1891)
+
+[sub_resource type="QuadMesh" id="QuadMesh_rjcti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mfo8"]
+size = Vector2(1, 1)
+
+[node name="Player" type="RigidBody2D" groups=["player"]]
+lock_rotation = true
+script = ExtResource("1_87m3w")
+
+[node name="ground_checker" type="Area2D" parent="."]
+scale = Vector2(0.975267, 0.905063)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground_checker"]
+position = Vector2(0, -5.26855e-07)
+scale = Vector2(0.961985, 0.789554)
+shape = SubResource("RectangleShape2D_urogt")
+debug_color = Color(0.89834, 0.126574, 0.70368, 0.42)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-5.96046e-08, -5.96046e-08)
+scale = Vector2(18, 18)
+mesh = SubResource("QuadMesh_rjcti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(18, 18)
+shape = SubResource("RectangleShape2D_1mfo8")
+debug_color = Color(0.117703, 0.634937, 0.369755, 0.42)
+
+[node name="visible_on_screen_notifier" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(8.9407e-08, 8.9407e-08)
+scale = Vector2(0.9, 0.9)
+
+[node name="backToEathTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="dissolveTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="ground_checker" to="." method="_on_ground_checker_body_entered"]
+[connection signal="body_exited" from="ground_checker" to="." method="_on_ground_checker_body_exited"]
+[connection signal="screen_exited" from="visible_on_screen_notifier" to="." method="_on_visible_on_screen_notifier_screen_exited"]
+[connection signal="timeout" from="backToEathTimer" to="." method="_on_back_to_eath_timer_timeout"]
+[connection signal="timeout" from="dissolveTimer" to="." method="_on_dissolve_timer_timeout"]

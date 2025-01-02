@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c1tylkxehikdn"]
+
+[node name="Trail" type="Line2D"]
+top_level = true
+z_index = -1
+points = PackedVector2Array(-6, 2, 16, 2)
+width = 5.0
+default_color = Color(0.136826, 0.136826, 0.136826, 1)
+antialiased = true
