@@ -10,9 +10,9 @@ var passes = 8 #how much the process repeated every frame
 @export var dist_bw_springs = 32
 @export  var spring_number = 6
 
-@export var depth = 490 #depth of the water
+@export var depth = 490 #depth of the water 490
 var target_height = global_position.y
-var bottom = target_height + depth
+@onready var bottom = target_height + depth
 
 @onready var water_polygon: Polygon2D = $water_polygon
 

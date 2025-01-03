@@ -5,7 +5,7 @@ extends Node
 @onready var pause_water_splash_timer: Timer = $PauseScreen/pause_screen/pause_water_body/Timer
 @onready var level_complete: CanvasLayer = $level_complete
 @onready var level: Node2D = $level
-@onready var game_over: CanvasLayer = $GameOver
+@onready var game_over: CanvasLayer = $GameOverScreen
 
 @onready var mesh_movement_timer: Timer = $PauseScreen/pause_screen/mesh_movement_timer
 
@@ -31,7 +31,8 @@ func _on_level_complete():
 	
 	if Global.unlocked_levels == level_no:
 		Global.unlocked_levels = level_no + 1
-	
+
+#pause screen trigger
 func _on_button_pressed() -> void:
 	level.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	hud.visible = false

@@ -12,9 +12,9 @@ var set_gravity: bool = true
 var upside_down: bool = false
 
 
-@onready var mesh_instance: MeshInstance2D = $MeshInstance2D
+@onready var mesh_instance: MeshInstance2D =  $MeshInstance2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var visible_on_screen_notifier: VisibleOnScreenEnabler2D = $visible_on_screen_notifier
+@onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 @onready var ground_checker: Area2D = $ground_checker
 #@onready var cpu_particles_2d: CPUParticles2D = $Ground_checker/CPUParticles2D
@@ -24,15 +24,14 @@ var upside_down: bool = false
 @onready var collision_og_size = Vector2(1,1)
 #
 func _ready(pos=Vector2(-275,-45)) -> void:
+	print("player created")
 	line_2d.position = mesh_instance.position
 	dissolve_timer.start()
 	mesh_instance.position = Vector2(0,0)
 	mesh_instance.mesh.size = Vector2(1,1)
-	collision_shape.shape.size = Vector2(1,1)
+	#collision_shape.shape.size = Vector2(1,1)
 	
 	SignalBus.level_complete.connect(_on_player_level_complete)
-	pass
-	#cpu_particles_2d.emitting = true
 
 func _process(delta: float) -> void:
 	
@@ -61,6 +60,7 @@ func _input(event):
 	
 	#jump
 	if Input.is_action_just_pressed("jump") and is_on_ground:
+		print("jumped")
 		apply_central_impulse(Vector2(0,-JUMP_FORCE)) 
 	
 
@@ -74,12 +74,15 @@ func _set_gravity():
 
 func _on_ground_checker_body_exited(body: Node2D) -> void:
 	if body.is_in_group("ground"):
+		print("now in air")
 		is_on_ground = false
 
 func _on_ground_checker_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ground"):
 		is_on_ground = true
+		print("now in ground")
 	if body.is_in_group("refilling"):
+		print("now on ground")
 		refill()
 
 #refilling for player logic-----------------------------------------------------
@@ -132,7 +135,7 @@ func refilling():
 
 #change_polarity logic----------------------------------------------------------
 
-@onready var back_to_earth_timer: Timer = $backToEathTimer
+@onready var back_to_earth_timer: Timer = $backToEarthTimer
 #@onready var polarity_shifter_effects: CPUParticles2D = $Ground_checker/polarityShifterEffects
 
 func change_polarity():
@@ -145,7 +148,7 @@ func change_polarity():
 	#which happens because our polarity change depends on a timer rather than checking position
 	set_gravity = false 
 
-func _on_back_to_eath_timer_timeout() -> void:
+func _on_back_to_earth_timer_timeout() -> void:
 	#changing the gravity related variables
 	upside_down= not upside_down #inverting the value
 	set_gravity = true #here turned on after fall to behave as usual
@@ -179,9 +182,9 @@ func _on_player_level_complete():
 
 
 #-------------------------------------------------------------------------------
-func _on_visible_on_screen_notifier_screen_exited() -> void:
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	gameOver()
-	
+
 func gameOver():
 	#cpu_particles_2d.emitting=false
 	if not level_complete:

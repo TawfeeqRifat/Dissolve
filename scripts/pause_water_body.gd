@@ -11,7 +11,7 @@ var passes = 8 #how much the process repeated every frame
 @export  var spring_number = 10
 
 
-@export var depth = 16 #depth of the water
+@export var depth = 0 #depth of the water
 var target_height = global_position.y
 @onready var bottom = target_height + depth
 
@@ -81,7 +81,4 @@ func splash(index, speed):
 		springs[index].velocity += speed
 
 
-func _on_timer_timeout() -> void:
-	print("splasing")
-	#splash(rng.randf_range(1,spring_number),2)
 	

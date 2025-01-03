@@ -1,6 +1,6 @@
 extends Node2D
 
-const PLAYER = preload("res://Scenes/player.tscn")
+
 
 @export var SPEED: float = 320 #250 improved speed for this new game
 @export var SCALE_SPEED: float = 0.05
@@ -12,7 +12,7 @@ var chances = 3
 var scale_value: float = 1
 func _ready() -> void:
 
-	player = PLAYER.instantiate()
+	player = Global.PLAYER.instantiate()
 	player.position = Vector2(camera_2d.position.x-275,-45)
 	add_child(player)
 	camera_2d.SPEED = SPEED
@@ -37,7 +37,7 @@ func _on_checkpointed(pos):
 #gamer over functionality-------------------------------------------------------
 
 #to allow to make the player aware of the failure
-@onready var restart_timer: Timer = $restartTimer
+@onready var restart_timer: Timer = $restart_timer
 
 func _on_player_game_over() -> void:
 	print("Game Over")
@@ -50,7 +50,6 @@ func _on_player_game_over() -> void:
 	restart_timer.start()
 
 func _on_restart_timer_timeout() -> void:
-
 	await create_tween().tween_property(camera_2d, "position", Vector2(checkpoint.x + 275,0),1 ).finished
 	_ready()
 
@@ -79,7 +78,7 @@ func _on_refill_timer_timeout() -> void:
 func _on_level_complete():
 	print("Manager: levelComplete")
 	camera_2d.SPEED = 0
-	player.camera_2d.enabled = true
+	#player.camera_2d.enabled = true
 	camera_2d.enabled = false
 	
 #-------------------------------------------------------------------------------
