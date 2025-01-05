@@ -43,6 +43,7 @@ offset_right = 175.0
 offset_bottom = 230.0
 
 [node name="0" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 116.0
 offset_top = 27.0
 offset_right = 191.0
@@ -51,6 +52,7 @@ theme_override_font_sizes/font_size = 45
 text = "0"
 
 [node name="1" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 327.0
 offset_top = 27.0
 offset_right = 402.0
@@ -59,6 +61,7 @@ theme_override_font_sizes/font_size = 45
 text = "1"
 
 [node name="2" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 537.0
 offset_top = 27.0
 offset_right = 612.0
@@ -67,6 +70,7 @@ theme_override_font_sizes/font_size = 45
 text = "2"
 
 [node name="3" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 743.0
 offset_top = 27.0
 offset_right = 818.0
@@ -75,6 +79,7 @@ theme_override_font_sizes/font_size = 45
 text = "3"
 
 [node name="4" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 109.0
 offset_top = 250.0
 offset_right = 184.0
@@ -83,6 +88,7 @@ theme_override_font_sizes/font_size = 45
 text = "4"
 
 [node name="5" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 338.0
 offset_top = 250.0
 offset_right = 413.0
@@ -91,6 +97,7 @@ theme_override_font_sizes/font_size = 45
 text = "5"
 
 [node name="6" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 550.0
 offset_top = 250.0
 offset_right = 625.0
@@ -99,6 +106,7 @@ theme_override_font_sizes/font_size = 45
 text = "6"
 
 [node name="7" type="Button" parent="levels"]
+layout_mode = 0
 offset_left = 752.0
 offset_top = 250.0
 offset_right = 827.0
