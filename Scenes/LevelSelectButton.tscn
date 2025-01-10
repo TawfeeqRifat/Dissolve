@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2wmmdnsn5w8a"]
+
+[ext_resource type="Script" path="res://scripts/level_select_button.gd" id="1_tqnab"]
+
+[node name="LevelSelectButton" type="Node2D"]
+script = ExtResource("1_tqnab")
+buttonName = "uf ae lb"
+
+[node name="Button" type="Button" parent="."]
+offset_left = -37.0
+offset_top = -37.0
+offset_right = 38.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 45
+metadata/_edit_use_anchors_ = true

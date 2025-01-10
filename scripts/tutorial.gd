@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var tutorial_instructions: Label = $"../../HUD/tutorial_instructions"
+@onready var tutorial_instructions: Label = $"../Tutorial_HUD/Tutorial_Instructions"
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and jumpSet:

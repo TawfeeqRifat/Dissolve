@@ -29,7 +29,7 @@ func _ready(pos=Vector2(-275,-45)) -> void:
 	dissolve_timer.start()
 	mesh_instance.position = Vector2(0,0)
 	mesh_instance.mesh.size = Vector2(1,1)
-	#collision_shape.shape.size = Vector2(1,1)
+	collision_shape.shape.size = Vector2(1,1)
 	
 	SignalBus.level_complete.connect(_on_player_level_complete)
 

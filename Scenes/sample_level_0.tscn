@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://b1s3e8t42u1x7"]
+[gd_scene load_steps=18 format=4 uid="uid://b1s3e8t42u1x7"]
 
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="1_f82oe"]
 [ext_resource type="Script" path="res://scripts/hud_controller.gd" id="1_h62xt"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/pause_screen.gd" id="3_bk6wc"]
 [ext_resource type="Script" path="res://scripts/pause_water_body.gd" id="4_efg27"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_55a05"]
+[ext_resource type="Script" path="res://smooth_path_modified.gd" id="5_hws0d"]
 [ext_resource type="TileSet" uid="uid://dviwanbgwa8r1" path="res://Assets/simple_tileset.tres" id="6_sy7m1"]
 [ext_resource type="PackedScene" uid="uid://cauov1k6277t4" path="res://Scenes/refill_zone.tscn" id="7_cm1f2"]
 [ext_resource type="PackedScene" uid="uid://bgbb4iehdspj4" path="res://Scenes/finish_zone.tscn" id="9_sombl"]
@@ -13,6 +14,14 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpooi"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_l3ssb"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_16smo"]
+
+[sub_resource type="Curve2D" id="Curve2D_1ura5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q0k5c"]
+
+[sub_resource type="Curve2D" id="Curve2D_5qq3h"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_u7vog"]
 
@@ -55,7 +64,19 @@ modulate = Color(1, 1, 1, 0.92549)
 position = Vector2(-11, 178)
 script = ExtResource("4_efg27")
 color = Color(0, 0, 0, 1)
+max_wave_height = 0.5
 spring_number = 40
+border_thickness = 1.1
+
+[node name="water_border" type="Path2D" parent="PauseScreen/pause_screen/pause_water_body"]
+modulate = Color(1, 1, 1, 0.92549)
+clip_children = 2
+material = SubResource("CanvasItemMaterial_16smo")
+curve = SubResource("Curve2D_1ura5")
+script = ExtResource("5_hws0d")
+spline_length = 5.0
+_smooth = true
+color = Color(0.0117647, 0.027451, 0.0862745, 1)
 
 [node name="Label" type="Label" parent="PauseScreen/pause_screen"]
 offset_left = 89.0
@@ -114,8 +135,19 @@ position = Vector2(0, -4)
 rotation = 0.514872
 script = ExtResource("4_efg27")
 color = Color(0.34, 0.0204, 0.0204, 0.870588)
+max_wave_height = 0.5
 spring_number = 70
+border_thickness = 1.1
 depth = 580
+
+[node name="water_border" type="Path2D" parent="GameOverScreen/water_body"]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_q0k5c")
+curve = SubResource("Curve2D_5qq3h")
+script = ExtResource("5_hws0d")
+spline_length = 5.0
+_smooth = true
+color = Color(0.341176, 0.0196078, 0.0196078, 0.870588)
 
 [node name="replay" type="Button" parent="GameOverScreen"]
 offset_left = 176.0

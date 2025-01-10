@@ -3,8 +3,8 @@ extends Node2D
 var velocity = 0
 var force = 0
 var height = position.y
-var target_height = position.y + 80
-	
+var target_height = position.y + 10
+var max_velocity = 100
 func water_update(spring_constant,dampening):
 	
 	height = position.y
@@ -12,8 +12,8 @@ func water_update(spring_constant,dampening):
 	var loss = - dampening * velocity 
 	force = - spring_constant * x + loss
 	velocity += force
-	position.y += velocity
-	pass
+	position.y += min(velocity,0.66)
+
 
 func initialize(x_position,y=null):
 	if y:
