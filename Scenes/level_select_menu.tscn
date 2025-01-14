@@ -1,0 +1,146 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1cq0kg2v2sm"]
+
+[ext_resource type="PackedScene" uid="uid://c6ljjcd417jfl" path="res://Scenes/water_body.tscn" id="1_dx8m3"]
+[ext_resource type="Script" path="res://scripts/level_selection_menu.gd" id="1_yyce0"]
+[ext_resource type="Script" path="res://scripts/pause_water_body.gd" id="2_c85jf"]
+[ext_resource type="Script" path="res://smooth_path_modified.gd" id="4_v8aes"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cuetw"]
+
+[sub_resource type="Curve2D" id="Curve2D_ds6r1"]
+
+[node name="LevelSelectMenu" type="CanvasLayer"]
+script = ExtResource("1_yyce0")
+
+[node name="water_body" parent="." instance=ExtResource("1_dx8m3")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(1170, 216)
+rotation = -3.14159
+script = ExtResource("2_c85jf")
+color = Color(0, 0, 0, 0.992157)
+max_wave_height = 0.5
+spring_number = 38
+border_thickness = 1.1
+depth = 0
+
+[node name="water_border" type="Path2D" parent="water_body"]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_cuetw")
+curve = SubResource("Curve2D_ds6r1")
+script = ExtResource("4_v8aes")
+spline_length = 5.0
+_smooth = true
+color = Color(0.0117647, 0.027451, 0.0862745, 1)
+
+[node name="water_body2" parent="." instance=ExtResource("1_dx8m3")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(-9, 476)
+script = ExtResource("2_c85jf")
+color = Color(0, 0, 0, 1)
+max_wave_height = 0.5
+spring_number = 38
+border_thickness = 1.1
+depth = 0
+
+[node name="water_border" type="Path2D" parent="water_body2"]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_cuetw")
+curve = SubResource("Curve2D_ds6r1")
+script = ExtResource("4_v8aes")
+spline_length = 5.0
+_smooth = true
+color = Color(0.0117647, 0.027451, 0.0862745, 1)
+
+[node name="Label" type="Label" parent="."]
+z_index = 2
+offset_left = 264.0
+offset_top = 28.0
+offset_right = 913.0
+offset_bottom = 165.0
+theme_override_font_sizes/font_size = 100
+text = "LEVEL SELECT"
+
+[node name="levels" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 115.0
+offset_top = 170.0
+offset_right = 175.0
+offset_bottom = 230.0
+
+[node name="0" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 27.0
+offset_right = 191.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 45
+text = "0"
+
+[node name="1" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 27.0
+offset_right = 402.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 45
+text = "1"
+
+[node name="2" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 537.0
+offset_top = 27.0
+offset_right = 612.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 45
+text = "2"
+
+[node name="3" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 743.0
+offset_top = 27.0
+offset_right = 818.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 45
+text = "3"
+
+[node name="4" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 250.0
+offset_right = 184.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 45
+text = "4"
+
+[node name="5" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 250.0
+offset_right = 413.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 45
+text = "5"
+
+[node name="6" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 250.0
+offset_right = 625.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 45
+text = "6"
+
+[node name="7" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 752.0
+offset_top = 250.0
+offset_right = 827.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 45
+text = "7"
+
+[editable path="water_body"]

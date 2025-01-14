@@ -1,0 +1,211 @@
+[gd_scene load_steps=16 format=4 uid="uid://yhkex5s0glbb"]
+
+[ext_resource type="Script" path="res://scripts/hud_controller.gd" id="1_ddqp8"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="3_r2rdo"]
+[ext_resource type="PackedScene" uid="uid://csh1wp3k836d2" path="res://Scenes/pause_screen.tscn" id="3_xrg52"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="4_dpagg"]
+[ext_resource type="TileSet" uid="uid://dviwanbgwa8r1" path="res://Assets/simple_tileset.tres" id="6_qbw24"]
+[ext_resource type="PackedScene" uid="uid://cauov1k6277t4" path="res://Scenes/refill_zone.tscn" id="7_ln3tc"]
+[ext_resource type="PackedScene" uid="uid://c6ljjcd417jfl" path="res://Scenes/water_body.tscn" id="8_hn0ih"]
+[ext_resource type="Script" path="res://scripts/check_point.gd" id="8_r2qsf"]
+[ext_resource type="PackedScene" uid="uid://bgbb4iehdspj4" path="res://Scenes/finish_zone.tscn" id="8_un21m"]
+[ext_resource type="Script" path="res://scripts/pause_water_body.gd" id="9_v35kf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1aw2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xyooe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u7fxs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l577a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jdjw"]
+
+[node name="SampleLevel_0" type="Node"]
+script = ExtResource("1_ddqp8")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Button" type="Button" parent="HUD"]
+offset_left = 1072.0
+offset_top = 26.0
+offset_right = 1080.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n1aw2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xyooe")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u7fxs")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l577a")
+text = "||"
+
+[node name="PauseScreen" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="pause_screen" parent="PauseScreen" instance=ExtResource("3_xrg52")]
+
+[node name="pause_water_body" parent="PauseScreen/pause_screen" index="0"]
+modulate = Color(1, 1, 1, 0.87451)
+
+[node name="level_complete" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="level_complete" type="Label" parent="level_complete"]
+offset_left = 457.0
+offset_top = 85.0
+offset_right = 1118.0
+offset_bottom = 195.0
+theme_override_font_sizes/font_size = 80
+text = "LEVEL COMPLETE"
+
+[node name="next_level" type="Button" parent="level_complete"]
+offset_left = 809.0
+offset_top = 230.0
+offset_right = 1109.0
+offset_bottom = 307.0
+theme_override_font_sizes/font_size = 50
+text = "NEXT LEVEL"
+
+[node name="replay" type="Button" parent="level_complete"]
+offset_left = 899.0
+offset_top = 345.0
+offset_right = 1109.0
+offset_bottom = 422.0
+theme_override_font_sizes/font_size = 50
+text = "REPLAY"
+
+[node name="main_menu" type="Button" parent="level_complete"]
+offset_left = 789.0
+offset_top = 466.0
+offset_right = 1109.0
+offset_bottom = 543.0
+theme_override_font_sizes/font_size = 50
+text = "MAIN MENU"
+
+[node name="level" type="Node2D" parent="."]
+
+[node name="GameManager" type="Node2D" parent="level" node_paths=PackedStringArray("camera_2d")]
+script = ExtResource("3_r2rdo")
+SPEED = 250.0
+SCALE_SPEED = null
+camera_2d = NodePath("../Camera2D")
+
+[node name="refill_timer" type="Timer" parent="level/GameManager"]
+
+[node name="restartTimer" type="Timer" parent="level/GameManager"]
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="level"]
+scale = Vector2(0.979271, 1.01036)
+ignore_rotation = false
+zoom = Vector2(1.5, 1.5)
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+script = ExtResource("4_dpagg")
+
+[node name="platformTileMap" type="TileMapLayer" parent="level" groups=["ground"]]
+use_parent_material = true
+tile_map_data = PackedByteArray("AADi/wAAAwABAAAAAADj/wAAAwABAAAAAADr/wAAAwABAAAAAADs/wAAAwABAAAAAADt/wAAAwABAAAAAADu/wAAAwABAAAAAADv/wAAAwABAAAAAADw/wAAAwABAAAAAADx/wAAAwABAAAAAADy/wAAAwABAAAAAADz/wAAAwABAAAAAAD0/wAAAwABAAAAAAD1/wAAAwABAAAAAAD2/wAAAwABAAAAAAD3/wAAAwABAAAAAAD4/wAAAwABAAAAAAD5/wAAAwABAAAAAAD6/wAAAwABAAAAAAD7/wAAAwABAAAAAAD8/wAAAwABAAAAAAD9/wAAAwABAAAAAAD+/wAAAwABAAAAAAD//wAAAwABAAAAAAAAAAAAAwABAAAAAAABAAAAAwABAAAAAAACAAAAAwABAAAAAAADAAAAAwABAAAAAAAEAAAAAwABAAAAAAAFAAAAAwABAAAAAAAGAAAAAwABAAAAAAAHAAAAAwABAAAAAAAIAAAAAwABAAAAAAAJAAAAAwABAAAAAAAKAAAAAwABAAAAAAALAAAAAwABAAAAAAAMAAAAAwABAAAAAAANAAAAAwABAAAAAAAOAAAAAwABAAAAAAAPAAAAAwABAAAAAAAQAAAAAwABAAAAAAARAAAAAwABAAAAAAASAAAAAwABAAAAAAATAAAAAwABAAAAAAAUAAAAAwABAAAAAAAVAAAAAwABAAAAAAAWAAAAAwABAAAAAAAXAAAAAwABAAAAAAAYAAAAAwABAAAAAAAZAAAAAwABAAAAAAAaAAAAAwABAAAAAAAbAAAAAwABAAAAAAAcAAAAAwABAAAAAAAdAAAAAwABAAAAAAAeAAAAAwABAAAAAAAfAAAAAwABAAAAAAAgAAAAAwABAAAAAAAhAAAAAwABAAAAAAAiAAAAAwABAAAAAAAjAAAAAwABAAAAAAAkAAAAAwABAAAAAAAlAAAAAwABAAAAAAAmAAAAAwABAAAAAAAnAAAAAwABAAAAAAAoAAAAAwABAAAAAAApAAAAAwABAAAAAAAqAAAAAwABAAAAAAArAAAAAwABAAAAAAAsAAAAAwABAAAAAAAtAAAAAwABAAAAAAAuAAAAAwABAAAAAAAvAAAAAwABAAAAAAAwAAAAAwABAAAAAAAxAAAAAwABAAAAAAAyAAAAAwABAAAAAAAzAAAAAwABAAAAAAA0AAAAAwABAAAAAAA1AAAAAwABAAAAAAA2AAAAAwABAAAAAAA3AAAAAwABAAAAAAA4AAAAAwABAAAAAAA5AAAAAwABAAAAAAA6AAAAAwABAAAAAAA7AAAAAwABAAAAAAA8AAAAAwABAAAAAAA9AAAAAwABAAAAAAA+AAAAAwABAAAAAAA/AAAAAwABAAAAAABAAAAAAwABAAAAAABBAAAAAwABAAAAAABCAAAAAwABAAAAAABDAAAAAwABAAAAAABEAAAAAwABAAAAAABFAAAAAwABAAAAAABGAAAAAwABAAAAAABHAAAAAwABAAAAAABIAAAAAwABAAAAAABJAAAAAwABAAAAAABKAAAAAwABAAAAAABLAAAAAwABAAAAAABMAAAAAwABAAAAAABNAAAAAwABAAAAAABOAAAAAwABAAAAAABPAAAAAwABAAAAAABQAAAAAwABAAAAAABRAAAAAwABAAAAAABSAAAAAwABAAAAAABTAAAAAwABAAAAAABUAAAAAwABAAAAAABVAAAAAwABAAAAAABWAAAAAwABAAAAAABXAAAAAwABAAAAAABYAAAAAwABAAAAAABZAAAAAwABAAAAAABaAAAAAwABAAAAAABbAAAAAwABAAAAAABcAAAAAwABAAAAAABdAAAAAwABAAAAAABeAAAAAwABAAAAAABfAAAAAwABAAAAAABgAAAAAwABAAAAAABhAAAAAwABAAAAAABiAAAAAwABAAAAAABjAAAAAwABAAAAAABkAAAAAwABAAAAAABlAAAAAwABAAAAAABmAAAAAwABAAAAAABnAAAAAwABAAAAAABoAAAAAwABAAAAAABpAAAAAwABAAAAAABqAAAAAwABAAAAAABrAAAAAwABAAAAAABsAAAAAwABAAAAAABtAAAAAwABAAAAAABuAAAAAwABAAAAAABvAAAAAwABAAAAAABwAAAAAwABAAAAAABxAAAAAwABAAAAAAByAAAAAwABAAAAAABzAAAAAwABAAAAAAB0AAAAAwABAAAAAAB1AAAAAwABAAAAAAB2AAAAAwABAAAAAAB3AAAAAwABAAAAAAB4AAAAAwABAAAAAAB5AAAAAwABAAAAAAB6AAAAAwABAAAAAAB7AAAAAwABAAAAAAB8AAAAAwABAAAAAAB9AAAAAwABAAAAAAB+AAAAAwABAAAAAAB/AAAAAwABAAAAAACAAAAAAwABAAAAAACBAAAAAwABAAAAAACCAAAAAwABAAAAAACDAAAAAwABAAAAAACEAAAAAwABAAAAAACFAAAAAwABAAAAAACGAAAAAwABAAAAAACHAAAAAwABAAAAAACIAAAAAwABAAAAAACJAAAAAwABAAAAAACKAAAAAwABAAAAAACLAAAAAwABAAAAAACMAAAAAwABAAAAAACNAAAAAwABAAAAAACOAAAAAwABAAAAAACPAAAAAwABAAAAAACQAAAAAwABAAAAAACRAAAAAwABAAAAAACSAAAAAwABAAAAAACTAAAAAwABAAAAAACUAAAAAwABAAAAAACVAAAAAwABAAAAAAAuAP//AwAAAAAAAABXAP//AwAAAAAAAABXAP7/AwAAAAAAAACWAAAAAwABAAAAAACXAAAAAwABAAAAAACYAAAAAwABAAAAAACZAAAAAwABAAAAAACaAAAAAwABAAAAAACbAAAAAwABAAAAAACcAAAAAwABAAAAAACdAAAAAwABAAAAAACeAAAAAwABAAAAAACfAAAAAwABAAAAAACgAAAAAwABAAAAAAChAAAAAwABAAAAAACiAAAAAwABAAAAAACjAAAAAwABAAAAAACkAAAAAwABAAAAAAClAAAAAwABAAAAAACmAAAAAwABAAAAAACnAAAAAwABAAAAAACoAAAAAwABAAAAAACpAAAAAwABAAAAAACqAAAAAwABAAAAAACrAAAAAwABAAAAAACsAAAAAwABAAAAAACtAAAAAwABAAAAAACuAAAAAwABAAAAAACvAAAAAwABAAAAAACwAAAAAwABAAAAAACxAAAAAwAAAAAAAACyAAAAAwABAAAAAACzAAAAAwABAAAAAAC0AAAAAwABAAAAAAC1AAAAAwABAAAAAAC2AAAAAwABAAAAAAC3AAAAAwABAAAAAAC4AAAAAwABAAAAAAC6AAAAAwABAAAAAAC7AAAAAwABAAAAAAC8AAAAAwABAAAAAAC9AAAAAwABAAAAAAC+AAAAAwABAAAAAAC/AAAAAwABAAAAAADAAAAAAwABAAAAAADBAAAAAwABAAAAAADCAAAAAwABAAAAAADDAAAAAwABAAAAAADEAAAAAwABAAAAAADFAAAAAwABAAAAAADGAAAAAwABAAAAAADHAAAAAwABAAAAAADIAAAAAwABAAAAAADJAAAAAwABAAAAAADKAAAAAwABAAAAAADLAAAAAwABAAAAAADMAAAAAwABAAAAAADNAAAAAwABAAAAAADOAAAAAwABAAAAAADPAAAAAwABAAAAAADQAAAAAwABAAAAAADRAAAAAwABAAAAAADSAAAAAwABAAAAAADTAAAAAwABAAAAAADUAAAAAwABAAAAAADVAAAAAwABAAAAAADWAAAAAwABAAAAAADXAAAAAwABAAAAAADYAAAAAwABAAAAAADZAAAAAwABAAAAAADaAAAAAwABAAAAAADbAAAAAwABAAAAAADcAAAAAwABAAAAAADdAAAAAwABAAAAAADeAAAAAwABAAAAAADfAAAAAwABAAAAAADgAAAAAwABAAAAAADhAAAAAwABAAAAAADiAAAAAwAAAAAAAADjAAAAAwABAAAAAADkAAAAAwABAAAAAADlAAAAAwABAAAAAADmAAAAAwABAAAAAADnAAAAAwABAAAAAADoAAAAAwABAAAAAADpAAAAAwABAAAAAADqAAAAAwABAAAAAADrAAAAAwABAAAAAADsAAAAAwABAAAAAADtAAAAAwABAAAAAADuAAAAAwABAAAAAADvAAAAAwABAAAAAADwAAAAAwABAAAAAADxAAAAAwABAAAAAADyAAAAAwABAAAAAADzAAAAAwABAAAAAAD0AAAAAwABAAAAAAD1AAAAAwABAAAAAAD2AAAAAwABAAAAAADiAAEAAwAAAAAAAADiAAIAAwAAAAAAAADiAAMAAwAAAAAAAADiAAQAAwAAAAAAAADiAAUAAwAAAAAAAADiAAYAAwAAAAAAAADiAAcAAwAAAAAAAADiAAgAAwAAAAAAAADiAAkAAwAAAAAAAADiAAoAAwAAAAAAAADiAAsAAwAAAAAAAADiAAwAAwAAAAAAAADiAA0AAwAAAAAAAADiAA4AAwAAAAAAAAD3AAAAAwABAAAAAAD4AAAAAwABAAAAAAD5AAAAAwABAAAAAAD6AAAAAwABAAAAAAD7AAAAAwABAAAAAAD8AAAAAwABAAAAAAD9AAAAAwABAAAAAAD+AAAAAwABAAAAAAD/AAAAAwABAAAAAAAAAQAAAwABAAAAAAABAQAAAwABAAAAAAACAQAAAwABAAAAAAADAQAAAwABAAAAAAAEAQAAAwABAAAAAAAFAQAAAwABAAAAAAAGAQAAAwABAAAAAAAHAQAAAwABAAAAAAAIAQAAAwABAAAAAAAJAQAAAwABAAAAAAAKAQAAAwABAAAAAAALAQAAAwABAAAAAAAMAQAAAwABAAAAAAANAQAAAwABAAAAAAAOAQAAAwABAAAAAAAPAQAAAwABAAAAAAAQAQAAAwABAAAAAAARAQAAAwABAAAAAAASAQAAAwABAAAAAAATAQAAAwABAAAAAAAUAQAAAwABAAAAAAAVAQAAAwABAAAAAAAWAQAAAwABAAAAAAAXAQAAAwABAAAAAAAYAQAAAwABAAAAAAAZAQAAAwABAAAAAAAaAQAAAwABAAAAAAAbAQAAAwABAAAAAAAcAQAAAwABAAAAAAAdAQAAAwABAAAAAAAeAQAAAwABAAAAAAAfAQAAAwABAAAAAAAgAQAAAwABAAAAAAAhAQAAAwABAAAAAAAiAQAAAwABAAAAAAAjAQAAAwABAAAAAAAkAQAAAwABAAAAAAAlAQAAAwABAAAAAAAmAQAAAwABAAAAAAAnAQAAAwABAAAAAAAoAQAAAwABAAAAAAApAQAAAwABAAAAAAAqAQAAAwABAAAAAAArAQAAAwABAAAAAAAsAQAAAwABAAAAAAAtAQAAAwABAAAAAAAuAQAAAwABAAAAAAAvAQAAAwABAAAAAAAwAQAAAwABAAAAAAAxAQAAAwABAAAAAAAyAQAAAwABAAAAAAAzAQAAAwABAAAAAAA0AQAAAwABAAAAAAA1AQAAAwABAAAAAAA2AQAAAwABAAAAAAA3AQAAAwABAAAAAAA4AQAAAwABAAAAAAA5AQAAAwABAAAAAAA6AQAAAwABAAAAAAA7AQAAAwABAAAAAAA8AQAAAwABAAAAAAA9AQAAAwABAAAAAAA+AQAAAwABAAAAAAA/AQAAAwABAAAAAABAAQAAAwABAAAAAABBAQAAAwABAAAAAABCAQAAAwABAAAAAABDAQAAAwABAAAAAABEAQAAAwABAAAAAABFAQAAAwABAAAAAABGAQAAAwABAAAAAABHAQAAAwABAAAAAABIAQAAAwABAAAAAABJAQAAAwABAAAAAABKAQAAAwAAAAAAAABKAf//AwAAAAAAAABKAfL/AwAAAAAAAADq/wAAAwABAAAAAADp/wAAAwABAAAAAADo/wAAAwABAAAAAADn/wAAAwABAAAAAADm/wAAAwABAAAAAADl/wAAAwABAAAAAADk/wAAAwABAAAAAABKAQEAAwAAAAAAAABKAQIAAwAAAAAAAABKAQMAAwAAAAAAAABKAQQAAwAAAAAAAABKAQUAAwAAAAAAAABKAQYAAwAAAAAAAABKAQcAAwAAAAAAAABKAQgAAwAAAAAAAABKAQkAAwAAAAAAAABKAQoAAwAAAAAAAABKAQsAAwAAAAAAAABKAQwAAwAAAAAAAABKAQ0AAwAAAAAAAABKAQ4AAwAAAAAAAABKAQ8AAwAAAAAAAAC5AAAAAwABAAAAAAA=")
+tile_set = ExtResource("6_qbw24")
+
+[node name="RefillZone" parent="level" instance=ExtResource("7_ln3tc")]
+position = Vector2(4079, -5)
+scale = Vector2(2.77324, 1)
+
+[node name="Finish_Zone" parent="level" instance=ExtResource("8_un21m")]
+position = Vector2(5295, -109)
+scale = Vector2(1, 0.77)
+
+[node name="CheckPoint" type="Area2D" parent="level"]
+position = Vector2(1714, -3)
+scale = Vector2(1, 37.64)
+script = ExtResource("8_r2qsf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/CheckPoint"]
+shape = SubResource("RectangleShape2D_1jdjw")
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="water_body" parent="GameOver" instance=ExtResource("8_hn0ih")]
+unique_name_in_owner = true
+rotation = 0.432842
+script = ExtResource("9_v35kf")
+color = Color(0.37, 0.0222, 0.0222, 0.8)
+spring_number = 45
+depth = 590
+
+[node name="GameOver" type="Label" parent="GameOver"]
+offset_left = 385.0
+offset_top = 103.0
+offset_right = 958.0
+offset_bottom = 240.0
+rotation = 0.433182
+theme_override_font_sizes/font_size = 100
+text = "GAME OVER"
+
+[node name="restart" type="Button" parent="GameOver"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -975.0
+offset_top = -407.0
+offset_right = -709.0
+offset_bottom = -330.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "RESTART"
+
+[node name="LevelSelect" type="Button" parent="GameOver"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -753.0
+offset_top = -303.0
+offset_right = -536.0
+offset_bottom = -226.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "LEVEL SELECT"
+
+[node name="main_menu" type="Button" parent="GameOver"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -572.0
+offset_top = -189.0
+offset_right = -267.0
+offset_bottom = -112.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "MAIN MENU"
+
+[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PauseScreen/pause_screen/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PauseScreen/pause_screen/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PauseScreen/pause_screen/main_menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="level_complete/next_level" to="." method="_on_next_level_pressed"]
+[connection signal="pressed" from="level_complete/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="level_complete/main_menu" to="." method="_on_main_menu_pressed"]
+[connection signal="timeout" from="level/GameManager/refill_timer" to="level/GameManager" method="_on_refill_timer_timeout"]
+[connection signal="timeout" from="level/GameManager/restartTimer" to="level/GameManager" method="_on_restart_timer_timeout"]
+[connection signal="body_exited" from="level/CheckPoint" to="level/CheckPoint" method="_on_body_exited"]
+[connection signal="pressed" from="GameOver/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOver/LevelSelect" to="." method="_on_level_select_pressed"]
+[connection signal="pressed" from="GameOver/main_menu" to="." method="_on_main_menu_pressed"]
+
+[editable path="PauseScreen/pause_screen"]
+[editable path="PauseScreen/pause_screen/pause_water_body"]

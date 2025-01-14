@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://fym0gb6r6hv"]
+
+[ext_resource type="Script" path="res://scripts/refill_body.gd" id="1_jdyyx"]
+
+[node name="refill_body" type="Node2D"]
+script = ExtResource("1_jdyyx")
+
+[node name="water_polygon" type="Polygon2D" parent="."]
+color = Color(0.00988632, 0.026366, 0.0873512, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

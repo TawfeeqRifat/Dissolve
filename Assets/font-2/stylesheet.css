@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'OZIK Soft';
+    src: url('OZIKSoft-Regular.eot');
+    src: local('OZIK Soft Regular'), local('OZIKSoft-Regular'),
+        url('OZIKSoft-Regular.eot?#iefix') format('embedded-opentype'),
+        url('OZIKSoft-Regular.woff2') format('woff2'),
+        url('OZIKSoft-Regular.woff') format('woff'),
+        url('OZIKSoft-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OZIK Soft';
+    src: url('OZIKSoft-Medium.eot');
+    src: local('OZIK Soft Medium'), local('OZIKSoft-Medium'),
+        url('OZIKSoft-Medium.eot?#iefix') format('embedded-opentype'),
+        url('OZIKSoft-Medium.woff2') format('woff2'),
+        url('OZIKSoft-Medium.woff') format('woff'),
+        url('OZIKSoft-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OZIK Soft';
+    src: url('OZIKSoft-Black.eot');
+    src: local('OZIK Soft Black'), local('OZIKSoft-Black'),
+        url('OZIKSoft-Black.eot?#iefix') format('embedded-opentype'),
+        url('OZIKSoft-Black.woff2') format('woff2'),
+        url('OZIKSoft-Black.woff') format('woff'),
+        url('OZIKSoft-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OZIK Soft';
+    src: url('OZIKSoft-Bold.eot');
+    src: local('OZIK Soft Bold'), local('OZIKSoft-Bold'),
+        url('OZIKSoft-Bold.eot?#iefix') format('embedded-opentype'),
+        url('OZIKSoft-Bold.woff2') format('woff2'),
+        url('OZIKSoft-Bold.woff') format('woff'),
+        url('OZIKSoft-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgbb4iehdspj4"]
+
+[ext_resource type="Script" path="res://scripts/finish_zone.gd" id="1_ugvns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1bou"]
+size = Vector2(20, 100)
+
+[node name="Finish_Zone" type="Node2D"]
+script = ExtResource("1_ugvns")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1, 2.8)
+shape = SubResource("RectangleShape2D_y1bou")
+debug_color = Color(0.487564, 0.412901, 1, 0.42)
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

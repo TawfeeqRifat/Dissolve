@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://jet2838w8h3i"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_cdmpn"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_5mnvp"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cdmpn")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="base" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(3.59175, 0, 0, 0, 1, 0, 0, 0, 75.4284, -1.45913, -0.873952, 0)
+size = Vector3(15.2393, 1, 1)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(0.00158939, -0.766428, 0.655122, 0.00185942, 0.655124, 0.766426, -1.00826, 8.21645e-10, 0.00244614, 4.06171, 2.33166, 1.62003)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node3D"]
+
+[node name="Label" type="Label" parent="Node3D/CanvasLayer"]
+offset_left = 66.0
+offset_top = 38.0
+offset_right = 106.0
+offset_bottom = 611.0
+theme_override_font_sizes/font_size = 50
+text = "D
+I
+S
+S
+O
+L
+V
+E"
+horizontal_alignment = 1
+
+[node name="play" type="Button" parent="Node3D/CanvasLayer"]
+offset_left = 232.0
+offset_top = 184.0
+offset_right = 482.0
+offset_bottom = 261.0
+rotation = -0.480089
+theme_override_font_sizes/font_size = 50
+text = "PLAY"
+
+[node name="options" type="Button" parent="Node3D/CanvasLayer"]
+offset_left = 270.0
+offset_top = 286.0
+offset_right = 520.0
+offset_bottom = 363.0
+theme_override_font_sizes/font_size = 50
+text = "OPTIONS"
+
+[node name="quit" type="Button" parent="Node3D/CanvasLayer"]
+offset_left = 264.0
+offset_top = 392.0
+offset_right = 514.0
+offset_bottom = 469.0
+rotation = 0.523599
+theme_override_font_sizes/font_size = 50
+text = "QUIT"
+
+[node name="Area3D" type="Area3D" parent="Node3D"]
+
+[node name="player" type="CSGBox3D" parent="Node3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.653766, 0, 0)
+use_collision = true
+material = SubResource("ORMMaterial3D_5mnvp")
+
+[connection signal="pressed" from="Node3D/CanvasLayer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Node3D/CanvasLayer/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Node3D/CanvasLayer/quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bwvi4cdplo4o3"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/level_0.gdshader" id="1_chmok"]
+
+[resource]
+shader = ExtResource("1_chmok")
+shader_parameter/lod = 1.5
