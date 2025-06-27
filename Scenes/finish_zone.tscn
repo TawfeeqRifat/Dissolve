@@ -1,12 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgbb4iehdspj4"]
+[gd_scene load_steps=7 format=3 uid="uid://bgbb4iehdspj4"]
 
 [ext_resource type="Script" path="res://scripts/finish_zone.gd" id="1_ugvns"]
+[ext_resource type="Shader" path="res://Assets/Shaders/finish_effect.gdshader" id="2_hka4d"]
+
+[sub_resource type="Gradient" id="Gradient_2h8pr"]
+colors = PackedColorArray(0.0431373, 0.560784, 0.811765, 0.686275, 0.113725, 0.670588, 0.952941, 0.807843)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nyinr"]
+gradient = SubResource("Gradient_2h8pr")
+fill = 1
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+metadata/_snap_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1bou"]
 size = Vector2(20, 100)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36u7l"]
+shader = ExtResource("2_hka4d")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.3
+shader_parameter/Brightness = 5.0
+shader_parameter/Rotation_deg = 45.0
+shader_parameter/Distortion = 1.53
+shader_parameter/Speed = 0.4
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
 [node name="Finish_Zone" type="Node2D"]
 script = ExtResource("1_ugvns")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -9.0
+offset_top = -140.0
+offset_right = 59.0
+offset_bottom = 130.0
+scale = Vector2(0.28, 1.04)
+texture = SubResource("GradientTexture2D_nyinr")
+flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -14,5 +48,14 @@ script = ExtResource("1_ugvns")
 scale = Vector2(1, 2.8)
 shape = SubResource("RectangleShape2D_y1bou")
 debug_color = Color(0.487564, 0.412901, 1, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_36u7l")
+offset_left = -9.0
+offset_top = -140.0
+offset_right = 11.0
+offset_bottom = 140.0
+color = Color(0.282353, 0.478431, 0.843137, 0.631373)
 
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

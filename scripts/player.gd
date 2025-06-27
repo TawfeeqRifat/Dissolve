@@ -120,7 +120,7 @@ func _on_dissolve_timer_timeout() -> void:
 
 #not using tween in the collision shapes of refilling so that the player body is very responsive to the inputs
 func refilling():
-	scale_value += 0.2
+	scale_value += 0.4
 	scale_value=scale_value
 	if scale_value <= 1:
 		create_tween().tween_property(mesh_instance.mesh,"size",Vector2(mesh_og_size.x,scale_value),0.3 )

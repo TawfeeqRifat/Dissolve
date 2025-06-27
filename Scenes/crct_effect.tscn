@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnif0rdntrfjm"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/crct_shader.gdshader" id="1_roli4"]
+[ext_resource type="Shader" path="res://Scenes/crct_effect2.gdshader" id="2_6cu1a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ut6he"]
+shader = ExtResource("1_roli4")
+shader_parameter/scanline_count = 200.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwdqh"]
+shader = ExtResource("2_6cu1a")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.05
+shader_parameter/scanlines_width = 0.1
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 4.0
+shader_parameter/roll_size = 50.0
+shader_parameter/roll_variation = 0.1
+shader_parameter/distort_intensity = 0.002
+shader_parameter/noise_opacity = 0.07
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.01
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.25
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="CRCT_EFFECT" type="CanvasLayer"]
+layer = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ut6he")
+offset_right = 1151.0
+offset_bottom = 642.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_bwdqh")
+offset_right = 1152.0
+offset_bottom = 660.0
+mouse_filter = 2

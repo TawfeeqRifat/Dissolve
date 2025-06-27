@@ -27,7 +27,7 @@ func _on_jump_body_exited(body: Node2D) -> void:
 func _on_jump_success_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		tutorial_instructions.text = "Nice"
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.5).timeout
 		tutorial_instructions.text = ""
 
 

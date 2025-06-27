@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dr464gd1se3xm"]
+[gd_scene load_steps=22 format=4 uid="uid://dr464gd1se3xm"]
 
 [ext_resource type="Script" path="res://scripts/hud_controller.gd" id="1_nocek"]
 [ext_resource type="PackedScene" uid="uid://c6ljjcd417jfl" path="res://Scenes/water_body.tscn" id="2_hmpqq"]
@@ -11,11 +11,9 @@
 [ext_resource type="Material" uid="uid://bwvi4cdplo4o3" path="res://Assets/new_shader_material.tres" id="6_btu23"]
 [ext_resource type="TileSet" uid="uid://dviwanbgwa8r1" path="res://Assets/simple_tileset.tres" id="7_dpbrn"]
 [ext_resource type="PackedScene" uid="uid://bgbb4iehdspj4" path="res://Scenes/finish_zone.tscn" id="9_2afao"]
-[ext_resource type="PackedScene" uid="uid://cauov1k6277t4" path="res://Scenes/refill_zone.tscn" id="11_rxt0j"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpooi"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_l3ssb"]
+[ext_resource type="PackedScene" uid="uid://cauov1k6277t4" path="res://Scenes/level_resources/refill_zone.tscn" id="11_rxt0j"]
+[ext_resource type="Shader" path="res://Assets/Shaders/space_background.gdshader" id="12_5kdhm"]
+[ext_resource type="PackedScene" uid="uid://cnif0rdntrfjm" path="res://Scenes/crct_effect.tscn" id="13_x0yn7"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_goqre"]
 
@@ -24,96 +22,31 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2gbl7"]
 size = Vector2(31, 437)
 
+[sub_resource type="Environment" id="Environment_7t4ti"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_l3ssb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpooi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrkws"]
+shader = ExtResource("12_5kdhm")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed_scale = 0.05
+shader_parameter/ON = 1
+shader_parameter/bg_color = Color(0.00784314, 0.0862745, 0.192157, 1)
+shader_parameter/offset = null
+shader_parameter/bigStarSlow = 0.0
+shader_parameter/mediumStarSlow = 4.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.0005
+shader_parameter/mediumStarAmount = 0.002
+shader_parameter/bigStarAmount = 0.0
+
 [node name="level_0" type="Node"]
 script = ExtResource("1_nocek")
-
-[node name="HUD" type="CanvasLayer" parent="."]
-layer = 3
-
-[node name="Button" type="Button" parent="HUD"]
-offset_left = 1040.0
-offset_top = 2.0
-offset_right = 1143.0
-offset_bottom = 131.0
-theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kpooi")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kpooi")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_kpooi")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_kpooi")
-text = "||"
-metadata/_edit_use_anchors_ = true
-
-[node name="PauseScreen" type="CanvasLayer" parent="."]
-layer = 3
-visible = false
-
-[node name="pause_screen" parent="PauseScreen" instance=ExtResource("2_hmpqq")]
-script = ExtResource("3_8xl1u")
-
-[node name="mesh" type="MeshInstance2D" parent="PauseScreen/pause_screen"]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(875, 171)
-rotation = 0.349066
-scale = Vector2(48.332, 49.4919)
-mesh = SubResource("QuadMesh_l3ssb")
-
-[node name="pause_water_body" parent="PauseScreen/pause_screen" instance=ExtResource("2_hmpqq")]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.92549)
-position = Vector2(-11, 178)
-script = ExtResource("4_p5awt")
-color = Color(0, 0, 0, 1)
-max_wave_height = 0.5
-spring_number = 40
-border_thickness = 1.1
-
-[node name="water_border" type="Path2D" parent="PauseScreen/pause_screen/pause_water_body"]
-modulate = Color(1, 1, 1, 0.92549)
-clip_children = 2
-material = SubResource("CanvasItemMaterial_goqre")
-curve = SubResource("Curve2D_f5kl5")
-script = ExtResource("5_006iv")
-spline_length = 5.0
-_smooth = true
-color = Color(0.0117647, 0.027451, 0.0862745, 1)
-
-[node name="Label" type="Label" parent="PauseScreen/pause_screen"]
-offset_left = 89.0
-offset_top = 30.0
-offset_right = 475.0
-offset_bottom = 167.0
-theme_override_font_sizes/font_size = 100
-text = "PAUSED"
-
-[node name="mesh_movement_timer" type="Timer" parent="PauseScreen/pause_screen"]
-wait_time = 6.0
-
-[node name="continue" type="Button" parent="PauseScreen/pause_screen"]
-offset_left = 183.0
-offset_top = 230.0
-offset_right = 483.0
-offset_bottom = 315.0
-theme_override_font_sizes/font_size = 50
-text = "CONTINUE"
-autowrap_mode = 2
-
-[node name="restart" type="Button" parent="PauseScreen/pause_screen"]
-offset_left = 183.0
-offset_top = 347.0
-offset_right = 483.0
-offset_bottom = 432.0
-theme_override_font_sizes/font_size = 50
-text = "RESTART"
-autowrap_mode = 2
-
-[node name="level_select" type="Button" parent="PauseScreen/pause_screen"]
-offset_left = 132.0
-offset_top = 459.0
-offset_right = 482.0
-offset_bottom = 544.0
-theme_override_font_sizes/font_size = 50
-text = "LEVEL SELECT"
-autowrap_mode = 2
 
 [node name="GameOverScreen" type="CanvasLayer" parent="."]
 layer = 3
@@ -252,8 +185,16 @@ position = Vector2(2014, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="level/polarize"]
 shape = SubResource("RectangleShape2D_2gbl7")
 
-[node name="Finish_Zone" parent="." instance=ExtResource("9_2afao")]
-position = Vector2(6232, -26)
+[node name="Finish_Zone" parent="level" instance=ExtResource("9_2afao")]
+position = Vector2(6215.69, -96.795)
+scale = Vector2(0.812, 0.47)
+
+[node name="RefillZone" parent="level" instance=ExtResource("11_rxt0j")]
+position = Vector2(5122, -3)
+scale = Vector2(2.48006, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="level"]
+environment = SubResource("Environment_7t4ti")
 
 [node name="Tutorial_HUD" type="CanvasLayer" parent="."]
 
@@ -272,15 +213,109 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 38
 horizontal_alignment = 1
 
-[node name="RefillZone" parent="." instance=ExtResource("11_rxt0j")]
-position = Vector2(5122, -3)
-scale = Vector2(2.48006, 1)
+[node name="PauseScreen" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
 
-[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
-[connection signal="timeout" from="PauseScreen/pause_screen/mesh_movement_timer" to="PauseScreen/pause_screen" method="_on_mesh_movement_timer_timeout"]
-[connection signal="pressed" from="PauseScreen/pause_screen/continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="PauseScreen/pause_screen/restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="PauseScreen/pause_screen/level_select" to="." method="_on_level_select_pressed"]
+[node name="pause_screen" parent="PauseScreen" instance=ExtResource("2_hmpqq")]
+script = ExtResource("3_8xl1u")
+
+[node name="mesh" type="MeshInstance2D" parent="PauseScreen/pause_screen"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(875, 171)
+rotation = 0.349066
+scale = Vector2(48.332, 49.4919)
+mesh = SubResource("QuadMesh_l3ssb")
+
+[node name="pause_water_body" parent="PauseScreen/pause_screen" instance=ExtResource("2_hmpqq")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.92549)
+position = Vector2(-11, 178)
+script = ExtResource("4_p5awt")
+color = Color(0, 0, 0, 1)
+max_wave_height = 0.5
+spring_number = 40
+border_thickness = 1.1
+
+[node name="water_border" type="Path2D" parent="PauseScreen/pause_screen/pause_water_body"]
+modulate = Color(1, 1, 1, 0.92549)
+clip_children = 2
+material = SubResource("CanvasItemMaterial_goqre")
+curve = SubResource("Curve2D_f5kl5")
+script = ExtResource("5_006iv")
+spline_length = 5.0
+_smooth = true
+color = Color(0.0117647, 0.027451, 0.0862745, 1)
+
+[node name="Label" type="Label" parent="PauseScreen/pause_screen"]
+offset_left = 89.0
+offset_top = 30.0
+offset_right = 475.0
+offset_bottom = 167.0
+theme_override_font_sizes/font_size = 100
+text = "PAUSED"
+
+[node name="mesh_movement_timer" type="Timer" parent="PauseScreen/pause_screen"]
+wait_time = 6.0
+
+[node name="continue" type="Button" parent="PauseScreen/pause_screen"]
+offset_left = 183.0
+offset_top = 230.0
+offset_right = 483.0
+offset_bottom = 315.0
+theme_override_font_sizes/font_size = 50
+text = "CONTINUE"
+autowrap_mode = 2
+
+[node name="restart" type="Button" parent="PauseScreen/pause_screen"]
+offset_left = 183.0
+offset_top = 347.0
+offset_right = 483.0
+offset_bottom = 432.0
+theme_override_font_sizes/font_size = 50
+text = "RESTART"
+autowrap_mode = 2
+
+[node name="level_select" type="Button" parent="PauseScreen/pause_screen"]
+offset_left = 132.0
+offset_top = 459.0
+offset_right = 482.0
+offset_bottom = 544.0
+theme_override_font_sizes/font_size = 50
+text = "LEVEL SELECT"
+autowrap_mode = 2
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Button" type="Button" parent="HUD"]
+offset_left = 1040.0
+offset_top = 2.0
+offset_right = 1143.0
+offset_bottom = 131.0
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kpooi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kpooi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kpooi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kpooi")
+text = "||"
+metadata/_edit_use_anchors_ = true
+
+[node name="CRCT_EFFECT" parent="." instance=ExtResource("13_x0yn7")]
+visible = false
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_nrkws")
+offset_left = -190.0
+offset_top = -406.0
+offset_right = 1259.0
+offset_bottom = 1218.0
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="GameOverScreen/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="GameOverScreen/level_select" to="." method="_on_level_select_pressed"]
 [connection signal="pressed" from="GameOverScreen/main_menu" to="." method="_on_main_menu_pressed"]
@@ -292,3 +327,10 @@ scale = Vector2(2.48006, 1)
 [connection signal="body_exited" from="level/jump" to="level" method="_on_jump_body_exited"]
 [connection signal="body_exited" from="level/jump_success" to="level" method="_on_jump_success_body_exited"]
 [connection signal="body_exited" from="level/polarize" to="level" method="_on_polarize_body_exited"]
+[connection signal="timeout" from="PauseScreen/pause_screen/mesh_movement_timer" to="PauseScreen/pause_screen" method="_on_mesh_movement_timer_timeout"]
+[connection signal="pressed" from="PauseScreen/pause_screen/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PauseScreen/pause_screen/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PauseScreen/pause_screen/level_select" to="." method="_on_level_select_pressed"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
+
+[editable path="CRCT_EFFECT"]

@@ -1,15 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1cq0kg2v2sm"]
+[gd_scene load_steps=9 format=3 uid="uid://c1cq0kg2v2sm"]
 
 [ext_resource type="PackedScene" uid="uid://c6ljjcd417jfl" path="res://Scenes/water_body.tscn" id="1_dx8m3"]
 [ext_resource type="Script" path="res://scripts/level_selection_menu.gd" id="1_yyce0"]
 [ext_resource type="Script" path="res://scripts/pause_water_body.gd" id="2_c85jf"]
 [ext_resource type="Script" path="res://smooth_path_modified.gd" id="4_v8aes"]
+[ext_resource type="Shader" path="res://Assets/Shaders/space_background.gdshader" id="6_x78yl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cuetw"]
 
 [sub_resource type="Curve2D" id="Curve2D_ds6r1"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sutxm"]
+shader = ExtResource("6_x78yl")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed_scale = 0.05
+shader_parameter/ON = 1
+shader_parameter/bg_color = Color(0.00784314, 0.0862745, 0.192157, 1)
+shader_parameter/offset = null
+shader_parameter/bigStarSlow = 0.0
+shader_parameter/mediumStarSlow = 4.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.0005
+shader_parameter/mediumStarAmount = 0.002
+shader_parameter/bigStarAmount = 0.0
+
 [node name="LevelSelectMenu" type="CanvasLayer"]
+layer = 0
 script = ExtResource("1_yyce0")
 
 [node name="water_body" parent="." instance=ExtResource("1_dx8m3")]
@@ -18,7 +34,7 @@ z_index = 1
 position = Vector2(1170, 216)
 rotation = -3.14159
 script = ExtResource("2_c85jf")
-color = Color(0, 0, 0, 0.992157)
+color = Color(0.0117647, 0.027451, 0.0862745, 1)
 max_wave_height = 0.5
 spring_number = 38
 border_thickness = 1.1
@@ -38,7 +54,7 @@ unique_name_in_owner = true
 z_index = 1
 position = Vector2(-9, 476)
 script = ExtResource("2_c85jf")
-color = Color(0, 0, 0, 1)
+color = Color(0.0117647, 0.027451, 0.0862745, 1)
 max_wave_height = 0.5
 spring_number = 38
 border_thickness = 1.1
@@ -70,15 +86,6 @@ offset_left = 115.0
 offset_top = 170.0
 offset_right = 175.0
 offset_bottom = 230.0
-
-[node name="0" type="Button" parent="levels"]
-layout_mode = 0
-offset_left = 116.0
-offset_top = 27.0
-offset_right = 191.0
-offset_bottom = 102.0
-theme_override_font_sizes/font_size = 45
-text = "0"
 
 [node name="1" type="Button" parent="levels"]
 layout_mode = 0
@@ -142,5 +149,32 @@ offset_right = 827.0
 offset_bottom = 325.0
 theme_override_font_sizes/font_size = 45
 text = "7"
+
+[node name="0" type="Button" parent="levels"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 27.0
+offset_right = 191.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 45
+text = "0"
+
+[node name="level_button_movement_timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_sutxm")
+offset_left = -190.0
+offset_top = -406.0
+offset_right = 1259.0
+offset_bottom = 1218.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="timeout" from="level_button_movement_timer" to="." method="_on_level_button_movement_timer_timeout"]
 
 [editable path="water_body"]

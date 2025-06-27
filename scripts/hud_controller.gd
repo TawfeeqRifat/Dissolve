@@ -11,8 +11,12 @@ extends Node
 
 @onready var pause: Node2D = $PauseScreen/pause_screen
 
+@onready var background: Sprite2D = $BackgroundLayer/background
+
 
 var level_no: int
+
+var isPaused: bool = false
 
 func _ready() -> void:
 	SignalBus.level_complete.connect(_on_level_complete)
@@ -29,25 +33,42 @@ func _on_level_complete():
 	level_complete.visible = true
 	hud.visible = false
 	
-	if Global.unlocked_levels == level_no:
-		Global.unlocked_levels = level_no + 1
+	Global.save_game(level_no,1)
+	#if Global.unlocked_levels == level_no:
+		#Global.unlocked_levels = level_no + 1
 
 #pause screen trigger
 func _on_button_pressed() -> void:
+	pause_functionality()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		if not isPaused:
+			pause_functionality()
+		else:
+			unpause_functionality()
+
+func pause_functionality() -> void:
+	isPaused = true
 	level.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	hud.visible = false
 	pause_screen.visible = true
 	pause.splash_once()
 	mesh_movement_timer.start()
 	pause.movement()
-
-
+	#background.material.set_shader_parameter("ON",0)
+	
 func _on_continue_pressed() -> void:
+	unpause_functionality()
+	
+
+func unpause_functionality() -> void:
+	isPaused = false
 	level.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	hud.visible = true
 	pause_screen.visible = false
 	mesh_movement_timer.stop()
-
+	#background.material.set_shader_parameter("ON",1)
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()

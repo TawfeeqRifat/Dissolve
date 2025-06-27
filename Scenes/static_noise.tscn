@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2ubwb66bhdey"]
+
+[ext_resource type="AudioStream" uid="uid://fvniwxuucgrh" path="res://Assets/Music/tv_static_noise.wav" id="1_ab6cv"]
+
+[node name="Static Noise" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_ab6cv")
+volume_db = -40.0
+pitch_scale = 0.2
+autoplay = true
+attenuation = 1.51572

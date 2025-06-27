@@ -1,6 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://jet2838w8h3i"]
+[gd_scene load_steps=6 format=3 uid="uid://jet2838w8h3i"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_cdmpn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kmsyc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_v1bit"]
+sky_material = SubResource("ProceduralSkyMaterial_kmsyc")
+
+[sub_resource type="Environment" id="Environment_qslpl"]
+background_mode = 2
+background_color = Color(0.654232, 0.654232, 0.654232, 1)
+sky = SubResource("Sky_v1bit")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_5mnvp"]
 
@@ -8,6 +22,20 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_cdmpn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686667, 2.23857, 0)
+visible = false
+omni_range = 3.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.55757, 0.736577, -0.382846, 0.0184091, 0.472045, 0.881382, 0.829926, 0.484384, -0.276758, -5.15471, 6.08698, 4.73165)
+visible = false
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qslpl")
 
 [node name="Node3D" type="Node3D" parent="."]
 
@@ -25,6 +53,10 @@ offset_left = 66.0
 offset_top = 38.0
 offset_right = 106.0
 offset_bottom = 611.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.230315, 0.230315, 0.230315, 0.552941)
+theme_override_constants/shadow_offset_x = -20
+theme_override_constants/shadow_offset_y = 15
 theme_override_font_sizes/font_size = 50
 text = "D
 I
@@ -68,6 +100,11 @@ text = "QUIT"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.653766, 0, 0)
 use_collision = true
 material = SubResource("ORMMaterial3D_5mnvp")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.499895, 0.68248, -0.533223, 0.746801, -0.0278608, 0.664464, 0.438627, -0.730373, -0.523604, -3.34982, 3.23711, -2.41739)
+spot_range = 12.0
+spot_attenuation = 0.07
 
 [connection signal="pressed" from="Node3D/CanvasLayer/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Node3D/CanvasLayer/options" to="." method="_on_options_pressed"]

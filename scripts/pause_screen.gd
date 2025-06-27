@@ -6,6 +6,7 @@ extends Node2D
 var last = 1
 
 var rng = RandomNumberGenerator.new()
+
 func movement():
 	var val = rng.randf_range(0,100)
 	create_tween().tween_property(mesh,"position",Vector2(mesh.position.x + val * - last, mesh.position.y+5),5)
