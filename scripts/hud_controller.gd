@@ -1,5 +1,7 @@
 extends Node
 
+@export var final_level = false
+
 @onready var pause_screen: CanvasLayer = $PauseScreen
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_water_splash_timer: Timer = $PauseScreen/pause_screen/pause_water_body/Timer
@@ -13,6 +15,9 @@ extends Node
 
 @onready var background: Sprite2D = $BackgroundLayer/background
 
+#for credits or level complete
+@onready var next_level: Button = $level_complete/next_level
+@onready var credits: Button = $level_complete/credits
 
 var level_no: int
 
@@ -22,6 +27,17 @@ func _ready() -> void:
 	SignalBus.level_complete.connect(_on_level_complete)
 	SignalBus.actual_game_over.connect(_on_actual_game_over)
 	level_no = int(name.split('_')[1])
+	
+	#for credits or nextlevel
+	print(final_level)
+	if final_level:
+		next_level.visible = false
+		next_level.disabled = true
+		credits.disabled = false
+		credits.visible = true
+		
+		
+		
 	
 func _on_actual_game_over():
 	level.process_mode = ProcessMode.PROCESS_MODE_DISABLED
@@ -80,7 +96,8 @@ func _on_main_menu_pressed() -> void:
 
 func _on_next_level_pressed() -> void:
 	print("next_leveled")
-	get_tree().change_scene_to_file("res://Scenes/levels/level_"+str(level_no+1)+".tscn")
+	if level_no + 1 < Global.total_levels:
+		get_tree().change_scene_to_file("res://Scenes/levels/level_"+str(level_no+1)+".tscn")
 
 
 func _on_replay_pressed() -> void:
@@ -89,3 +106,7 @@ func _on_replay_pressed() -> void:
 
 func _on_level_select_pressed() -> void:
 	get_tree().change_scene_to_file(Global.LEVEL_SELECTION_MENU)
+
+
+func _on_credits_pressed() -> void:
+	get_tree().change_scene_to_file(Global.CREDITS)

@@ -6,6 +6,5 @@ extends Area2D
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print(position)
 		color.visible = false
 		SignalBus.checkpoint.emit(position_node.global_position,upsidedown)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1cq0kg2v2sm"]
+[gd_scene load_steps=15 format=3 uid="uid://c1cq0kg2v2sm"]
 
 [ext_resource type="PackedScene" uid="uid://c6ljjcd417jfl" path="res://Scenes/water_body.tscn" id="1_dx8m3"]
 [ext_resource type="Script" path="res://scripts/level_selection_menu.gd" id="1_yyce0"]
@@ -9,6 +9,21 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cuetw"]
 
 [sub_resource type="Curve2D" id="Curve2D_ds6r1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ds6qh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eouxh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vorda"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgnf0"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_x80i2"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_0jryf"]
+events = [SubResource("InputEventKey_x80i2")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sutxm"]
 shader = ExtResource("6_x78yl")
@@ -50,7 +65,6 @@ _smooth = true
 color = Color(0.0117647, 0.027451, 0.0862745, 1)
 
 [node name="water_body2" parent="." instance=ExtResource("1_dx8m3")]
-unique_name_in_owner = true
 z_index = 1
 position = Vector2(-9, 476)
 script = ExtResource("2_c85jf")
@@ -71,12 +85,52 @@ color = Color(0.0117647, 0.027451, 0.0862745, 1)
 
 [node name="Label" type="Label" parent="."]
 z_index = 2
-offset_left = 264.0
-offset_top = 28.0
-offset_right = 913.0
-offset_bottom = 165.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -324.5
+offset_top = 24.0
+offset_right = 324.5
+offset_bottom = 161.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 100
 text = "LEVEL SELECT"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+z_index = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 22.0
+offset_right = -475.0
+offset_bottom = 167.0
+grow_horizontal = 2
+scale = Vector2(1, 1.8)
+pivot_offset = Vector2(0, 70)
+theme_override_font_sizes/font_size = 100
+text = "<"
+
+[node name="back" type="Button" parent="."]
+z_index = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 14.0
+offset_right = -475.0
+offset_bottom = 159.0
+grow_horizontal = 2
+scale = Vector2(0.889, 1.6)
+pivot_offset = Vector2(0, 70)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ds6qh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_eouxh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vorda")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kgnf0")
+shortcut = SubResource("Shortcut_0jryf")
+text = "<"
 
 [node name="levels" type="Control" parent="."]
 visible = false
@@ -170,11 +224,12 @@ layer = -5
 texture_repeat = 2
 material = SubResource("ShaderMaterial_sutxm")
 offset_left = -190.0
-offset_top = -406.0
+offset_top = -382.0
 offset_right = 1259.0
-offset_bottom = 1218.0
+offset_bottom = 1242.0
 color = Color(0, 0, 0, 1)
 
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="level_button_movement_timer" to="." method="_on_level_button_movement_timer_timeout"]
 
 [editable path="water_body"]

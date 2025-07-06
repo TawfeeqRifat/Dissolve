@@ -30,10 +30,16 @@ func _ready() -> void:
 				lev.position = Vector2(cur_x,upper_axis-45)
 		cur_x += 300
 		lev.button.connect('pressed',open_level.bind(i))
+		
+	SignalBus.play_menu_music.emit()
 
 
 func open_level(level_no):
 	var level = load("res://Scenes/levels/level_"+str(level_no)+".tscn")
+	
+	#for music
+	SignalBus.pause_menu_music.emit()
+	
 	get_tree().change_scene_to_packed(level)
 
 
@@ -54,3 +60,7 @@ func level_button_movement():
 
 func _on_level_button_movement_timer_timeout() -> void:
 	level_button_movement()
+
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file(Global.MAIN_MENU)

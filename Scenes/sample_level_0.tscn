@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://smooth_path_modified.gd" id="5_hws0d"]
 [ext_resource type="TileSet" uid="uid://dviwanbgwa8r1" path="res://Assets/simple_tileset.tres" id="6_sy7m1"]
 [ext_resource type="Material" uid="uid://bwvi4cdplo4o3" path="res://Assets/new_shader_material.tres" id="6_wmd6h"]
-[ext_resource type="PackedScene" uid="uid://cauov1k6277t4" path="res://Scenes/level_resources/refill_zone.tscn" id="7_cm1f2"]
+[ext_resource type="PackedScene" uid="uid://cauov1k6277t4" path="res://Scenes/refill_zone.tscn" id="7_cm1f2"]
 [ext_resource type="PackedScene" uid="uid://bgbb4iehdspj4" path="res://Scenes/finish_zone.tscn" id="9_sombl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpooi"]

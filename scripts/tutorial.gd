@@ -19,7 +19,7 @@ func _input(event: InputEvent) -> void:
 var jumpSet = false
 func _on_jump_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		tutorial_instructions.text = "press space to jump"
+		tutorial_instructions.text = "Press Space to Jump"
 		jumpSet = true
 	
 
@@ -34,5 +34,5 @@ func _on_jump_success_body_exited(body: Node2D) -> void:
 var polaritySet = false
 func _on_polarize_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		tutorial_instructions.text = "press z"
+		tutorial_instructions.text = "Press Z"
 		polaritySet = true

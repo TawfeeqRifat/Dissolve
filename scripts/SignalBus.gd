@@ -12,3 +12,10 @@ signal level_complete
 
 #for checkpoint
 signal checkpoint
+
+#for turner
+signal turner
+
+#for music
+signal play_menu_music
+signal pause_menu_music

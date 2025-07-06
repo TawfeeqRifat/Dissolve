@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://scripts/finish_zone.gd" id="1_ugvns"]
 [ext_resource type="Shader" path="res://Assets/Shaders/finish_effect.gdshader" id="2_hka4d"]
 
-[sub_resource type="Gradient" id="Gradient_2h8pr"]
+[sub_resource type="Gradient" id="Gradient_fohrn"]
 colors = PackedColorArray(0.0431373, 0.560784, 0.811765, 0.686275, 0.113725, 0.670588, 0.952941, 0.807843)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nyinr"]
-gradient = SubResource("Gradient_2h8pr")
+gradient = SubResource("Gradient_fohrn")
 fill = 1
 fill_from = Vector2(1, 0)
 fill_to = Vector2(0, 0)

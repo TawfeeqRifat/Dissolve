@@ -11,7 +11,6 @@ var is_on_ground = false # for jump
 var set_gravity: bool = true
 var upside_down: bool = false
 
-
 @onready var mesh_instance: MeshInstance2D =  $MeshInstance2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
@@ -172,6 +171,7 @@ func _on_back_to_earth_timer_timeout() -> void:
 
 var level_complete: bool = false
 @onready var camera_2d: Camera2D = $MeshInstance2D/Camera2D
+@onready var remote_transform_2d: RemoteTransform2D = $MeshInstance2D/RemoteTransform2D
 
 func _on_player_level_complete():
 	print("player: level_complete")
@@ -185,6 +185,7 @@ func _on_player_level_complete():
 	#await create_tween().tween_property(mesh_instance, "rotation_degrees", 15,3).finished
 	#create_tween().tween_property(camera_2d, "rotation_degrees", 45,3)
 	#camera_2d.enabled = true
+	#camera_2d.make_current()
 
 
 #-------------------------------------------------------------------------------
