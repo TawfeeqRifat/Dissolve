@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://c4rlk7mgw1mvc"]
+[gd_scene load_steps=24 format=4 uid="uid://c4rlk7mgw1mvc"]
 
 [ext_resource type="Script" path="res://scripts/hud_controller.gd" id="1_cbnfo"]
 [ext_resource type="PackedScene" uid="uid://c6ljjcd417jfl" path="res://Scenes/water_body.tscn" id="2_wu01q"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bgbb4iehdspj4" path="res://Scenes/finish_zone.tscn" id="9_gjnrk"]
 [ext_resource type="AudioStream" uid="uid://bu5xr870vlowj" path="res://Assets/Music/Easter Eggs [l23T3o7tAQQ].wav" id="9_tkiae"]
 [ext_resource type="PackedScene" uid="uid://cba6oxnwk8251" path="res://Scenes/check_point.tscn" id="11_14oyg"]
+[ext_resource type="AudioStream" uid="uid://bf2oekr824d04" path="res://Assets/Music/reverse.wav" id="11_87ed0"]
 [ext_resource type="Shader" path="res://Assets/Shaders/space_background.gdshader" id="13_tfanr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpooi"]
@@ -254,6 +255,11 @@ script = ExtResource("5_7frjm")
 [node name="music_player" parent="level/Camera2D" instance=ExtResource("8_ok8eo")]
 stream = ExtResource("9_tkiae")
 volume_db = -40.0
+
+[node name="reverse" type="AudioStreamPlayer2D" parent="level/Camera2D"]
+stream = ExtResource("11_87ed0")
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="GameManger" type="Node2D" parent="level" node_paths=PackedStringArray("camera_2d")]
 script = ExtResource("6_44voq")

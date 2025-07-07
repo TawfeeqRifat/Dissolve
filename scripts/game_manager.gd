@@ -10,6 +10,9 @@ extends Node2D
 
 #music player
 @onready var music_player: AudioStreamPlayer2D = $"../Camera2D/music_player"
+#sfx
+@onready var reverse: AudioStreamPlayer2D = $"../Camera2D/reverse"
+
 var music_position = 0.0
 var chances = 3
 var scale_value: float = 1
@@ -75,13 +78,19 @@ func _on_player_game_over() -> void:
 	player.SPEED = 0
 	camera_2d.SPEED = 50
 	player.queue_free()
-	restart_timer.start()
 	
 	#music player
 	music_position = music_player.get_playback_position()
 	music_player.stop()
+	
+	restart_timer.start()
+	
+	
+	
 
 func _on_restart_timer_timeout() -> void:
+	reverse.play()
+	print("reverse played")
 	await create_tween().tween_property(camera_2d, "position", Vector2(checkpoint.x + 275,0),1 ).finished
 	_ready()
 

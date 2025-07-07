@@ -8,3 +8,4 @@ volume_db = -40.0
 pitch_scale = 0.2
 autoplay = true
 attenuation = 1.51572
+bus = &"SFX"

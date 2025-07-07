@@ -5,4 +5,5 @@
 
 [node name="Menu_music_player" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_4bqkr")
+bus = &"Music"
 script = ExtResource("2_d0wyg")
