@@ -55,6 +55,7 @@ func _on_level_complete():
 
 #pause screen trigger
 func _on_button_pressed() -> void:
+	SignalBus.play_press_sfx.emit()
 	pause_functionality()
 
 func _input(event: InputEvent) -> void:
@@ -75,6 +76,7 @@ func pause_functionality() -> void:
 	#background.material.set_shader_parameter("ON",0)
 	
 func _on_continue_pressed() -> void:
+	SignalBus.play_press_sfx.emit()
 	unpause_functionality()
 	
 
@@ -87,6 +89,7 @@ func unpause_functionality() -> void:
 	#background.material.set_shader_parameter("ON",1)
 
 func _on_restart_pressed() -> void:
+	SignalBus.play_press_sfx.emit()
 	get_tree().reload_current_scene()
 
 
@@ -95,18 +98,26 @@ func _on_main_menu_pressed() -> void:
 
 
 func _on_next_level_pressed() -> void:
+	SignalBus.play_press_sfx.emit()
 	print("next_leveled")
 	if level_no + 1 < Global.total_levels:
 		get_tree().change_scene_to_file("res://Scenes/levels/level_"+str(level_no+1)+".tscn")
 
 
 func _on_replay_pressed() -> void:
+	SignalBus.play_press_sfx.emit()
 	get_tree().reload_current_scene()
 
 
 func _on_level_select_pressed() -> void:
+	SignalBus.play_press_sfx.emit()
 	get_tree().change_scene_to_file(Global.LEVEL_SELECTION_MENU)
 
 
 func _on_credits_pressed() -> void:
+	SignalBus.play_press_sfx.emit()
 	get_tree().change_scene_to_file(Global.CREDITS)
+
+
+func _on_button_hover() -> void:
+	SignalBus.play_select_sfx.emit()

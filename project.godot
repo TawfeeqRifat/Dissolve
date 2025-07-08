@@ -22,6 +22,7 @@ Global="*res://scripts/Global.gd"
 CrctEffect="*res://Scenes/crct_effect.tscn"
 StaticNoise="*res://Scenes/static_noise.tscn"
 MenuMusicPlayer="*res://Scenes/menu_music_player.tscn"
+GlobalScene="*res://Scenes/Global_scene.tscn"
 
 [display]
 

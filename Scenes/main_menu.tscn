@@ -1,7 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://jet2838w8h3i"]
+[gd_scene load_steps=19 format=3 uid="uid://jet2838w8h3i"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_cdmpn"]
 [ext_resource type="Script" path="res://scripts/character_3d.gd" id="2_hfe28"]
+[ext_resource type="PackedScene" uid="uid://kn8rymlxabmy" path="res://Scenes/main_menu_button.tscn" id="3_wef8l"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_p0d85"]
+device = -1
+keycode = 4194305
+echo = true
+
+[sub_resource type="Shortcut" id="Shortcut_atvxm"]
+events = [SubResource("InputEventKey_p0d85")]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_m8sad"]
 albedo_color = Color(1, 1, 1, 0)
@@ -67,31 +76,27 @@ V
 E"
 horizontal_alignment = 1
 
-[node name="play" type="Button" parent="MainMenu"]
-offset_left = 232.0
-offset_top = 184.0
-offset_right = 482.0
-offset_bottom = 261.0
-rotation = -0.480089
-theme_override_font_sizes/font_size = 50
-text = "PLAY"
+[node name="play" parent="MainMenu" instance=ExtResource("3_wef8l")]
+offset_left = 239.0
+offset_top = 154.0
+offset_right = 393.0
+offset_bottom = 242.0
 
-[node name="options" type="Button" parent="MainMenu"]
-offset_left = 270.0
-offset_top = 286.0
+[node name="options" parent="MainMenu" instance=ExtResource("3_wef8l")]
+offset_left = 239.0
+offset_top = 274.0
 offset_right = 520.0
-offset_bottom = 363.0
-theme_override_font_sizes/font_size = 50
+offset_bottom = 362.0
 text = "OPTIONS"
 
-[node name="quit" type="Button" parent="MainMenu"]
-offset_left = 264.0
-offset_top = 392.0
-offset_right = 514.0
-offset_bottom = 469.0
-rotation = 0.523599
-theme_override_font_sizes/font_size = 50
-text = "QUIT"
+[node name="quit" parent="MainMenu" instance=ExtResource("3_wef8l")]
+offset_left = 240.0
+offset_top = 394.0
+offset_right = 394.0
+offset_bottom = 482.0
+shortcut = SubResource("Shortcut_atvxm")
+text = "QUIT
+"
 
 [node name="Node3D" type="Node3D" parent="."]
 
@@ -161,7 +166,7 @@ offset_left = 534.0
 offset_top = 154.0
 offset_right = 797.0
 offset_bottom = 252.0
-min_value = -40.0
+min_value = -60.0
 max_value = 0.0
 
 [node name="Music" type="Label" parent="Options"]
@@ -212,4 +217,5 @@ text = "<"
 [connection signal="input_event" from="Node3D/character/Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="value_changed" from="Options/music_slider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="Options/sfx_slider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="mouse_entered" from="Options/back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="Options/back" to="." method="_on_back_pressed"]

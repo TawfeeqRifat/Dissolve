@@ -19,3 +19,7 @@ signal turner
 #for music
 signal play_menu_music
 signal pause_menu_music
+
+#for sfx
+signal play_press_sfx
+signal play_select_sfx

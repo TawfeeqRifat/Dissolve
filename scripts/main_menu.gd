@@ -31,9 +31,9 @@ func _on_play_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	main_menu.visible = false
-	await create_tween().tween_property(main_camera, "position",Vector3(0.656,1.424,0.015),1)
-	await create_tween().tween_property(main_camera,"global_rotation_degrees",Vector3(-90,90,0),1)
-	await get_tree().create_timer(1).timeout
+	await create_tween().tween_property(main_camera, "position",Vector3(0.656,1.424,0.015),0.5)
+	await create_tween().tween_property(main_camera,"global_rotation_degrees",Vector3(-90,90,0),0.5)
+	await get_tree().create_timer(0.5).timeout
 	options.visible = true
 	options_selected = true
 	
@@ -64,8 +64,13 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 func _on_back_pressed() -> void:
 	options.visible = false
-	await create_tween().tween_property(main_camera, "position",Vector3(3.33,2.082,1.62),1)
-	await create_tween().tween_property(main_camera,"global_rotation_degrees",Vector3(-46.1,89.8,0.1),1)
-	await get_tree().create_timer(1).timeout
+	await create_tween().tween_property(main_camera, "position",Vector3(3.33,2.082,1.62),0.5)
+	await create_tween().tween_property(main_camera,"global_rotation_degrees",Vector3(-46.1,89.8,0.1),0.5)
+	await get_tree().create_timer(0.5).timeout
 	main_menu.visible = true
 	options_selected = false
+	Global.save()
+
+
+func _on_back_mouse_entered() -> void:
+	SignalBus.play_select_sfx.emit()
